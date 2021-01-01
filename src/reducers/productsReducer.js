@@ -8,13 +8,13 @@ export const productsReducer = (products, action) => {
 
     switch (action.type) {
         case ACTIONS.FETCH_ALL:
-            return fetch_all(products, action.payload.data);
+            return fetchALl(products, action.payload.data);
         default:
-            new Error('Something went wrong');
+            throw new Error('Something went wrong');
     }
 }
 
-const fetch_all = (products, newData) => {
+const fetchALl = (products, newData) => {
 
-    return {...products, data: newData};
+    return {...products, data: newData, loading:false};
 }

@@ -5,11 +5,11 @@ import { ACTIONS } from '../../reducers/productsReducer';
 
 import './Products.scss'
 
-import {useLocation} from 'react-router-dom';
+// import spinner
+import spinner from '../../assets/spinner.gif'
 
 const Products = () => {
     const [products, dispatch, fetchProducts] = useContext(ProductsContext);
-    const location = useLocation()
     const getProducts = async () => {
 
         const data = await fetchProducts();
@@ -17,15 +17,14 @@ const Products = () => {
 
     }
 
+
     useEffect(() => {
 
         getProducts();
 
-        console.log('Called from Products');
-
     }, []);
 
-    console.log(products);
+    console.log('Products from products %O', products);
 
     const remove = (e) => {
         console.log(e.target);
@@ -35,6 +34,7 @@ const Products = () => {
         <div className="products">
 
         {
+            products.loading ? <img src={spinner} alt="Loading..."/> :
             products.data.map(product => (
             <div key={ product.id } className="product">
                 <h1>{ product.title }</h1>
